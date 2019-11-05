@@ -1,0 +1,26 @@
+%Low pass filtering
+
+clc;
+clear all;
+
+aa = imread('cameraman.tif');
+a  = imnoise(aa, 'gaussian', 0.02)
+w = [1 1 1; 1 1 1; 1 1 1]/9;
+[row col] = size(a);
+f = double(a)
+
+for x=2:1:(row-1)
+    for y=2:1:(col-1)
+        g(x,y) = w(1)*f(x-1, y-1) + w(2)*f(x-1, y) + w(3)*f(x-1, y+1) + w(4)*f(x, y-1) + w(5)*f(x, y) + w(6)*f(x, y+1) + w(7)*f(x+1, y+1) + w(8)*f(x+1, y) + w(9)*f(x+1, y+1);
+    end
+end
+
+figure(1);
+subplot(2,1,1);
+imshow(a)
+title('ORIGINAL IMAGE')
+
+subplot(2,1,2)
+imshow(uint8(g))
+title('IMAGE AFTER LOW PASS FILTERING')
+        

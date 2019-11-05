@@ -1,0 +1,17 @@
+clear all;
+clc;
+aa=imread('mri.tif');
+a=double(aa);
+[r c]=size(a);
+s=input('Enter the value of gamma:');
+for i=1:1:r
+        for j=1:1:c
+            q(i,j)=a(i,j)^s;
+        end
+end
+subplot(1,2,1)
+imshow(aa);
+title('Before Power Law Transformation')
+subplot(1,2,2)
+imshow(uint8(q));
+title('After Power Law Transformation')

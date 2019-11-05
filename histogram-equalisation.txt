@@ -1,0 +1,45 @@
+%Histogram Equalization
+
+clear all;
+clc;
+a=imread('pout.tif');
+a=double(a);
+big=max((max(a)))
+[r c]=size(a);
+s=r*c;
+h=zeros(1,300)
+z=zeros(1,300)
+for n=1:1:r
+    for m=1:1:c
+        if a(n,m)==0
+            a(n,m)=1;
+        end
+    end
+end
+
+
+for n=1:1:r
+    for m=1:1:c
+        t=a(n,m)
+        h(t)=h(t)+1
+    end
+end
+pdf=h/s;
+cdf(1)=pdf(1);
+for x=2:1:big
+    cdf(x)=pdf(x)+cdf(x-1);
+end
+new=round(cdf*big)
+new=new+1
+for p=1:1:r
+    for q=1:1:c
+        temp=a(p,q);
+        b(p,q)=new(temp);
+        t=b(p,q)
+        z(t)=z(t)+1;
+    end
+end
+figure(1),imshow(uint8(a))
+figure(2),bar(h)
+figure(3),imshow(uin8(b))
+figure(4),bar(z)

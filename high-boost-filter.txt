@@ -1,0 +1,22 @@
+%highboost filtering
+clear all;
+clc;
+aa=imread('cameraman.tif');
+a=double(aa);
+[r c]=size(a);
+w=[-1 -1 -1;-1 8.9 -1;-1 -1 -1]
+for x=2:1:r-1
+    for y=2:1:c-1
+        a1(x,y)=w(1)*a(x-1,y-1)+w(2)*a(x-1,y)+w(3)*a(x-1,y+1)+w(4)*a(x,y-1)+w(5)*a(x,y)+w(6)*a(x,y+1)+w(7)*a(x+1,y-1)+w(8)*a(x+1,y)+w(9)*a(x+1,y+1);
+    end
+end
+figure(1)
+
+subplot(2,1,1)
+imshow(uint8(a))
+title('ORIGINAL IMAGE')
+
+
+subplot(2,1,2)
+imshow(uint8(a1))
+title('IMAGE AFTER HIGHBOOST FILTERING')

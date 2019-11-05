@@ -1,0 +1,29 @@
+%Low median pass filtering
+
+clc;
+clear all;
+
+I = imread('mri.tif');
+J  = imnoise(I, 'salt & pepper', 0.02)
+a = double(J);
+b = a;
+[row col] = size(a);
+
+for x=2:1:(row-1)
+    for y=2:1:(col-1)
+        a1 = [a(x-1,y-1) a(x-1,y) a(x-1,y+1) a(x,y-1) a(x,y) a(x,y+1) a(x+1,y+1) a(x+1,y) a(x+1,y+1)];
+        a2 = sort(a1);
+        med = a2(5);
+        b(x,y) = med;
+    end
+end
+
+figure(1);
+
+subplot(2,1,1);
+imshow(uint(J))
+title('ORIGINAL IMAGE')
+
+subplot(2,1,2)
+imshow(uint8(b))
+title('IMAGE AFTER MEDIAN LOW PASS FILTERING')

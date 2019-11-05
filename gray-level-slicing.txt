@@ -1,0 +1,22 @@
+%GrayLevelSlicing
+
+clear all
+clc
+p=imread('mri.tif');
+a=double(p);
+[r,c]=size(p);
+for i=1:1:r
+        for j=1:1:c
+                if((a(i,j)>50))&&(a(i,j)<150)
+                        a(i,j)=255;
+                else
+                        a(i,j)=0;
+                end
+        end
+end
+figure(1)
+imshow(p)
+title('Before Gray Level Slicing');
+figure(2)
+imshow(uint8(a))
+title('After Gray Level Slicing');

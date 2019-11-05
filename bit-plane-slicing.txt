@@ -1,0 +1,20 @@
+%BitPlane Slicing
+
+clear all;
+clc;
+a = imread('coins.png');
+b = bitget(a,1);
+c = bitget(a,8);
+d = bitget(a,4);
+subplot(2,2,1)
+imshow(a)
+title ('Bitplane1')
+subplot(2,2,2)
+imshow(logical(b))
+title ('Bitplane2')
+subplot(2,2,3)
+imshow(logical(c))
+title ('Bitplane3')
+subplot(2,2,4)
+imshow(logical(d))
+title ('Bitplane4')

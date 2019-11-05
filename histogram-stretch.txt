@@ -1,0 +1,36 @@
+%Histogram Stretching
+
+clear all;
+clc;
+a=imread('pout.tif');
+a=double(a);
+[r c]=size(a);
+a=a+1;
+w=min(min(a));
+constant=255/(max(max(a))-min(min(a)));
+smin=0;
+for x1=1:1:r
+    for y1=1:1:c
+        s(x1,y1)=constant*(a(x1,y1)-w)+smin;
+    end
+end
+
+h=zeros(1,300);
+for n=1:1:r
+    for m=1:1:c
+        t=a(n,m);
+        h(t)=h(t)+1;
+    end
+end
+figure(1),bar(h)
+s=s+1;
+h=zeros(1,400);
+for n=1:1:r
+    for m=1:1:c
+        t=round(s(n,m));
+        h(t)=h(t)+1;
+    end
+end
+figure(2),bar(h)
+figure(3),imshow(uint8(a))
+figure(4),imshow(uint8(s))
